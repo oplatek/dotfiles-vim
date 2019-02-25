@@ -138,7 +138,7 @@ let g:jsx_ext_required = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_python_python_exec = '/usr/local/bin/python3'
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--ignore=E126,E127,E128,E121,E225,E226,E401,E402,E501,W291'
+let g:syntastic_python_flake8_args = '--ignore=E126,E127,E128,E121,E225,E226,E401,E402,E501,W291,E731'
 
 let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
