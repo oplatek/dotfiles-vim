@@ -235,7 +235,7 @@ map <silent> <F1> :if !&spell\|set spl=csa spell\|elseif &spl=='csa'\|set spl=en
 
 " Formatting
 filetype indent on
-set autoindent smartindent
+set autoindent
 set expandtab smarttab tabstop=4 shiftwidth=4 softtabstop=4 foldlevelstart=99
 
 " Persistent undo
@@ -272,7 +272,7 @@ autocmd BufWinLeave * if exists("g:qfix_win")&&expand("<abuf>")==g:qfix_win|unle
 augroup END
 augroup group_spell
     autocmd!
-    autocmd FileType tex,text,markdown,html,wiki setlocal spell
+    autocmd FileType tex,markdown,html,wiki setlocal spell
 augroup END
 " autocmd BufEnter * let &titlestring=":Vim:" . expand("%:t") | set title  " FIXME DO I MISS IT?
 
