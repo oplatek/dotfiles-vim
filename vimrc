@@ -68,7 +68,6 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'kien/ctrlp.vim'
 Plugin 'DirDiff.vim'
-Plugin 'mhinz/vim-startify'
 
 
 " Language related plugins
