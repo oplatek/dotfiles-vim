@@ -1,4 +1,7 @@
-" TODO profile vimrc so it loads quickly - especially autocmds via 'vim --startuptime vim.log'
+" References:
+" - https://github.com/kracejic/dotfiles/blob/master/.vimrc
+"
+" If slow, profile vimrc so it loads quickly - especially autocmds via 'vim --startuptime vim.log'
 "*****************************************************************************
 "" Portable settings
 "*****************************************************************************
@@ -18,75 +21,81 @@ let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable
 "*****************************************************************************
 "" Vundle Load
 "*****************************************************************************
+" See docs: https://github.com/VundleVim/Vundle.vim
 "{{{
-" Load vundle
-" no vi-compatible
-set nocompatible
+set nocompatible              " be iMproved, required
+filetype off                  " required -> turned on later after plugin are loaded
 
 " Setting up Vundle - the vim plugin bundler
-let s:vundle_readme=expand(printf('%s/bundle/vundle/README.md', s:portable))
+let s:vundle_readme=expand(printf('%s/bundle/Vundle.vim/README.md', s:portable))
 let s:bundle_dir = s:portable . '/bundle'
-let s:vundle_dir = s:bundle_dir . '/vundle'
+let s:vundle_dir = s:bundle_dir . '/Vundle.vim'
 if !filereadable(s:vundle_readme)
   echo "Installing Vundle..."
   echo "Type :BundleInstall for installing the plugins"
   execute 'silent !mkdir -p ' . s:bundle_dir
-  execute 'silent !git clone https://github.com/gmarik/vundle ' . s:vundle_dir
+  execute 'silent !git clone https://github.com/VundleVim/Vundle.vim ' . s:vundle_dir
 endif
 
-" required for vundle
-filetype off
-
 " add the bundle directory to 'runtimepath'
-let &runtimepath = printf('%s/bundle/vundle,%s', s:portable, &runtimepath)
+let &runtimepath = printf('%s/bundle/Vundle.vim,%s', s:portable, &runtimepath)
 call vundle#rc(s:bundle_dir)
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
 "}}}
 
 "*****************************************************************************
 "" Vundle install packages
 "*****************************************************************************
 "{{{
-"
+
+call vundle#begin()  " Keep Plugin commands between vundle#begin/end."
+
 " original repos on github
-" Bundle 'shime/vim-livedown'
-" Bundle 'juneedahamed/svnj.vim'
-" Bundle 'tshirtman/vim-cython'
-Bundle 'editorconfig/editorconfig-vim'
-Bundle 'kana/vim-fakeclip'
-Bundle 'mxw/vim-jsx'
-" Bundle 'fidian/hexmode'
-Bundle 'tpope/vim-fugitive'
-" wrapper around unix commands
-Bundle 'tpope/vim-eunuch'
-Bundle 'tpope/vim-git'
+Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle, required
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'kana/vim-fakeclip'
+
+Plugin 'tpope/vim-fugitive'  " git
+Plugin 'tpope/vim-eunuch'  " :Delete, :Unlink, :Move, :Rename, :Chmod, :Mkdir, :Find, :Locate, :SudoWrite, :SudoEdit
+Plugin 'tpope/vim-git'
 " aligning text (e.g. tables) on multiple lines
-" Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
-" Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'SirVer/ultisnips'
+Plugin 'godlygeek/tabular'  " TODO learn usage
+Plugin 'plasticboy/vim-markdown'
+Plugin 'tpope/vim-surround'  " TODO learn usage
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'SirVer/ultisnips'
 " Snippets are separate from ultisnips engine
-Bundle 'honza/vim-snippets'
-Bundle 'scrooloose/syntastic'
-Bundle 'Valloric/YouCompleteMe'
-" Bundle 'yegappan/mru'
-Bundle 'kien/ctrlp.vim'
-Bundle 'DirDiff.vim'
-Bundle 'mhinz/vim-startify'
+Plugin 'honza/vim-snippets'
+Plugin 'kien/ctrlp.vim'
+Plugin 'DirDiff.vim'
+Plugin 'mhinz/vim-startify'
 
-" vim-scripts at www.vim.org
-Bundle 'tComment'
-" Bundle 'taglist.vim'
-Bundle 'mayansmoke'
-"alternate files
-" Bundle 'a.vim'
-Bundle 's3rvac/AutoFenc'
-Bundle 'vim-scripts/Tabmerge'
 
+" Language related plugins
+Plugin 'mxw/vim-jsx'
+Plugin 'scrooloose/syntastic'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'sheerun/vim-polyglot'  " Syntaxes for a lot of languages
+" C++ related
+Plugin 'derekwyatt/vim-fswitch'  " Swithing .h <-> .cc
+Plugin 'bfrg/vim-cpp-modern'
+" Plugin 'fidian/hexmode'
+Plugin 'rhysd/vim-clang-format'
+" Python related
+Plugin 'tomtom/tcomment_vim'
+Plugin 's3rvac/AutoFenc'
+Plugin 'vim-scripts/Tabmerge'
+Plugin 'vim-scripts/mayansmoke'
+
+" TODO learn use sessions
+Plugin 'tpope/vim-obsession'
+Plugin 'dhruvasagar/vim-prosession'
+Plugin 'gikmx/ctrlp-obsession'
+
+
+Plugin 'dyng/ctrlsf.vim'  "search in files. Use :FS [pattern]
+
+call vundle#end()            " required
 "}}}
 
 
@@ -103,8 +112,8 @@ let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 " let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsListSnippets = '<c-o>' " terminal does not understand <c-tab>
 let g:ultisnips_python_style = 'sphinx'
-let g:ultisnips_author = 'Ondrej Platek, Ufal MFF UK'
-let g:ultisnips_author_email = 'oplatek@ufal.mff.cuni.cz'
+let g:ultisnips_author = 'Ondrej Platek'
+let g:ultisnips_author_email = 'ondrej.platek@seznam.cz'
 
 
 let g:ycm_python_binary_path = 'python3.6'
@@ -117,7 +126,7 @@ let g:ycm_path_to_python_interpreter = 'python3.6'
 let g:ycm_global_ycm_extra_conf = '' "where to search for .ycm_extra_conf.py if not found
 
 
-" let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
 
 let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
 let g:ycm_filetype_whitelist = { '*': 1 }
@@ -157,8 +166,6 @@ set diffopt+=vertical
 let mapleader=","
 let g:mapleader=","
 syntax on
-filetype plugin on
-set nocompatible               " be iMproved
 set wildmenu
 set wildignore=*.o,*~,*.pyc,.git\*,.hg\*,.svn\*
 set wildmode=longest,list
@@ -176,7 +183,7 @@ set confirm " Confirmation instead operation failure e.g :q
 set nojoinspaces " does not put two spaces after join (like in US)
 set completeopt=menuone,longest,preview
 set hlsearch " syntax highlighting
-set ffs=unix,dos,mac " Use Unix as the standard file type
+set ffs=unix,mac,dos " Use Unix as the standard file type
 silent! colorscheme mayansmoke " interactively :colors mayansmoke
 let g:tex_flavor='latex'
 
@@ -196,24 +203,8 @@ set noerrorbells
 set novisualbell
 set t_vb=
 
-autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
+"autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif  " TODO document what does it do?
 
-if has('gui_running')
-    set guifont=-misc-fixed-medium-r-normal--15-*-iso8859-2
-    if has('gui_gtk2')
-      set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-    elseif has('gui_Photon')
-      set guifont=Bitstream\ Vera\ Sans\ Mono:s11
-    elseif has('gui_kde')
-     set guifont=Bitstream\ Vera\ Sans\ Mono/11/-1/5/50/0/0/0/1/0
-    elseif has('x11')
-     set guifont=*-lucidatypewriter-medium-r-normal-*-*-110-*-*-m-*-*
-    else
-     set guifont=Lucida_Console:h11:cDEFAULT
-    endif
-    "disables icons shows only tooltips
-    set tb=
-endif
 
 " Encoding: Using Autofenc
 " good if a)enca program installed b) encoding specified in header
@@ -226,21 +217,18 @@ map <S-Tab> :if &keymap==''\|set keymap=czech\|else\|set keymap=\|endif<CR>
 " ensure sane defaults
 set nocp ru ls=2 nosm smd is bs=indent,eol,start nf=alpha
 set nowmnu wim=longest,list,full mouse=iv kmp=czech imi=0 ims=0 noimc
-
-set nospell
+set nospell  " spell checks are slow on large files -> See augroup group_spell where it is enabled
 set spl=en
 " spellcheck: command; ]S next error; zg add to spelldic; z= correct from spelldic
 map <silent> <F1> :if !&spell\|set spl=csa spell\|elseif &spl=='csa'\|set spl=en spell\|else\|set nospell\|endif<CR>
 
 
 " Formatting
-filetype indent on
 set autoindent
 set expandtab smarttab tabstop=4 shiftwidth=4 softtabstop=4 foldlevelstart=99
 
-" Persistent undo
+" Persistent undo - Enable undo that lasts between sessions.
 if has("persistent_undo")
-" Enable undo that lasts between sessions.
     set undofile
     set undolevels=1000   " How many undos
     set undoreload=10000  " number of lines to save for undo
@@ -298,7 +286,7 @@ augroup filetype_python
     autocmd!
     autocmd FileType python setlocal foldmethod=indent
 augroup END
-augroup gropu_comment_marker
+augroup group_comment_marker
     autocmd!
     autocmd FileType vim,tex setlocal foldmethod=marker
 augroup END
@@ -321,6 +309,8 @@ nnoremap <Leader>d :YcmCompleter GetDoc<Cr>
 nnoremap <Leader>f :YcmCompleter GoTo<Cr>
 nnoremap <Leader>r :YcmForceCompileAndDiagnostics<CR>
 nnoremap <Leader>c :SyntasticCheck<CR>
+
+nnoremap <Leader>h :FSHere<CR>   "fswitch
 
 
 nnoremap <C-n> :put=''<CR>
