@@ -26,8 +26,11 @@ BASE_FLAGS = [
     '-pedantic',
     '-std=c++14',
     '-xc++',
-    '-I/usr/lib/'
-    '-I/usr/include/'
+    '-I/usr/lib/',
+    '-I/usr/include/',
+    '-I/workspace/gitlab/kaldi_stable-2019-11-11/src',
+    '-I/workspace/gitlab/kaldi_stable-2019-11-11/tools/openfst-1.6.7/include',
+
 ]
 
 SOURCE_EXTENSIONS = [
@@ -87,7 +90,7 @@ def make_relative_paths_in_flags_absolute(flags, working_directory):
         return list(flags)
     new_flags = []
     make_next_absolute = False
-    path_flags = [ '-isystem', '-I', '-iquote', '--sysroot=' ]
+    path_flags = ['-isystem', '-I', '-iquote', '--sysroot=']
     for flag in flags:
         new_flag = flag
 
@@ -102,7 +105,7 @@ def make_relative_paths_in_flags_absolute(flags, working_directory):
                 break
 
             if flag.startswith(path_flag):
-                path = flag[ len(path_flag): ]
+                path = flag[len(path_flag):]
                 new_flag = path_flag + os.path.join(working_directory, path)
                 break
 
@@ -116,7 +119,7 @@ def flags_for_clang_complete(root):
         clang_complete_path = find_nearest(root, '.clang_complete')
         clang_complete_flags = open(clang_complete_path, 'r').read().splitlines()
         return clang_complete_flags
-    except:
+    except Exception:
         return None
 
 def flags_for_include(root):
@@ -128,7 +131,7 @@ def flags_for_include(root):
                 real_path = os.path.join(dirroot, dir_path)
                 flags = flags + ["-I" + real_path]
         return flags
-    except:
+    except Exception:
         return None
 
 def flags_for_compilation_database(root, filename):
@@ -148,7 +151,7 @@ def flags_for_compilation_database(root, filename):
         return make_relative_paths_in_flags_absolute(
             compilation_info.compiler_flags_,
             compilation_info.compiler_working_dir_)
-    except:
+    except Exception:
         return None
 
 def flags_for_file(filename):
@@ -168,5 +171,6 @@ def flags_for_file(filename):
         'flags': final_flags,
         'do_cache': True
     }
+
 
 FlagsForFile = flags_for_file
