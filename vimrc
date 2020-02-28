@@ -72,7 +72,7 @@ Plugin 'DirDiff.vim'
 
 " Language related plugins
 Plugin 'mxw/vim-jsx'
-Plugin 'scrooloose/syntastic'
+" Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'sheerun/vim-polyglot'  " Syntaxes for a lot of languages
 " C++ related
