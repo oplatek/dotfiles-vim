@@ -26,10 +26,10 @@ BASE_FLAGS = [
     '-pedantic',
     '-std=c++14',
     '-xc++',
-    '-I/usr/lib/',
-    '-I/usr/include/',
-    '-I/workspace/gitlab/kaldi_stable-2019-11-11/src',
-    '-I/workspace/gitlab/kaldi_stable-2019-11-11/tools/openfst-1.6.7/include',
+    '-isystem/usr/lib/',
+    '-isystem/usr/include/',
+    '-isystem/workspace/gitlab/kaldi_stable-2019-11-11/src',
+    '-isystem/workspace/gitlab/kaldi_stable-2019-11-11/tools/openfst-1.6.7/include',
 
 ]
 

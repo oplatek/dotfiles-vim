@@ -122,8 +122,6 @@ let g:ycm_complete_in_comments = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_path_to_python_interpreter = 'python3.6'
 " let g:ycm_autoclose_preview_window_after_completion = 1 " close preview automaticly
-let g:ycm_global_ycm_extra_conf = '' "where to search for .ycm_extra_conf.py if not found
-
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
 
