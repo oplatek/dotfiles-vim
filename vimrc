@@ -259,7 +259,6 @@ augroup group_spell
     autocmd!
     autocmd FileType tex,markdown,html,wiki setlocal spell
 augroup END
-" autocmd BufEnter * let &titlestring=":Vim:" . expand("%:t") | set title  " FIXME DO I MISS IT?
 
 function ProgramSet()
     setlocal number fdm=syntax fo=tcqnl1 formatlistpat=^\\s*\\%\\(\\d\\+\\\|[A-Za-z]\\\|[IVXLCDM]\\+\\)[\\]:.)}\\t]\\s*
@@ -296,6 +295,9 @@ augroup END
 " Fix bug where crontab cannot use Vim backup files & crontab is complaining:
 " crontab: temp file must be edited in place
 autocmd filetype crontab setlocal nobackup nowritebackup
+
+" fswitch
+au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp' 
 "}}}
 
 "*****************************************************************************
@@ -305,9 +307,10 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 nnoremap <Leader>d :YcmCompleter GetDoc<Cr>
 nnoremap <Leader>f :YcmCompleter GoTo<Cr>
 nnoremap <Leader>r :YcmForceCompileAndDiagnostics<CR>
-nnoremap <Leader>c :SyntasticCheck<CR>
+nnoremap <Leader>c :YcmDiags<CR>
 
-nnoremap <Leader>h :FSHere<CR>   "fswitch
+" fswitch
+nnoremap <Leader>s :FSHere<CR>   
 
 
 nnoremap <C-n> :put=''<CR>
