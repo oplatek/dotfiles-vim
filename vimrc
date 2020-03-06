@@ -72,7 +72,7 @@ Plugin 'DirDiff.vim'
 
 " Language related plugins
 Plugin 'mxw/vim-jsx'
-" Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'sheerun/vim-polyglot'  " Syntaxes for a lot of languages
 " C++ related
@@ -297,7 +297,8 @@ augroup END
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 " fswitch
-au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp' 
+au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'
+au! BufEnter *.h,*hpp let b:fswitchdst = 'cc,cpp'
 "}}}
 
 "*****************************************************************************
@@ -310,7 +311,7 @@ nnoremap <Leader>r :YcmForceCompileAndDiagnostics<CR>
 nnoremap <Leader>c :YcmDiags<CR>
 
 " fswitch
-nnoremap <Leader>s :FSHere<CR>   
+nnoremap <Leader>s :FSHere<CR>
 
 
 nnoremap <C-n> :put=''<CR>
