@@ -104,6 +104,8 @@ call vundle#end()            " required
 "{{{
 filetype plugin indent on     " required!
 
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 let g:fakeclip_terminal_multiplexer_type = 'tmux'
 "" vim-scripts/UltiSnips
 let g:UltiSnipsExpandTrigger = '<c-l>'
@@ -136,7 +138,7 @@ let g:jsx_ext_required = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_python_python_exec = 'python3.6'
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--max-line-length 100 --ignore=E126,E127,E128,E121,E225,E226,E401,E402,E731,F401,E302,F821,W503'
+let g:syntastic_python_flake8_args = '--max-line-length 120 --ignore=E126,E127,E128,E121,E225,E226,E401,E402,E731,F401,E302,F821,W503'
 
 let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
