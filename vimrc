@@ -87,8 +87,8 @@ Plugin 'vim-scripts/Tabmerge'
 Plugin 'vim-scripts/mayansmoke'
 
 " TODO learn use sessions
-Plugin 'tpope/vim-obsession'
-Plugin 'dhruvasagar/vim-prosession'
+" Plugin 'tpope/vim-obsession'
+" Plugin 'dhruvasagar/vim-prosession'
 Plugin 'gikmx/ctrlp-obsession'
 
 
@@ -224,7 +224,7 @@ map <silent> <F1> :if !&spell\|set spl=csa spell\|elseif &spl=='csa'\|set spl=en
 
 " Formatting
 set autoindent
-set expandtab smarttab tabstop=4 shiftwidth=4 softtabstop=4 foldlevelstart=99
+set expandtab smarttab tabstop=2 shiftwidth=2 softtabstop=2 foldlevelstart=99
 
 " Persistent undo - Enable undo that lasts between sessions.
 if has("persistent_undo")
