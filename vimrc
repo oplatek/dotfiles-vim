@@ -117,12 +117,12 @@ let g:ultisnips_author = 'Ondrej Platek'
 let g:ultisnips_author_email = 'ondrej.platek@seznam.cz'
 
 
-let g:ycm_python_binary_path = 'python3.6'
-let g:ycm_server_python_interpreter = 'python3.6'
+let g:ycm_python_binary_path = 'python3'
+let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_add_preview_to_completeopt = 1 " add preview string
 let g:ycm_complete_in_comments = 1
 let g:ycm_key_invoke_completion = '<C-Space>'
-let g:ycm_path_to_python_interpreter = 'python3.6'
+let g:ycm_path_to_python_interpreter = 'python3'
 " let g:ycm_autoclose_preview_window_after_completion = 1 " close preview automaticly
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
@@ -136,7 +136,7 @@ let g:jsx_ext_required = 0
 
 " let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_python_python_exec = 'python3.6'
+let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--max-line-length 120 --ignore=E126,E127,E128,E121,E225,E226,E401,E402,E731,F401,E302,F821,W503'
 
