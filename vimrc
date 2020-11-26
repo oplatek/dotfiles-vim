@@ -88,8 +88,7 @@ Plugin 'vim-scripts/mayansmoke'
 
 " TODO learn use sessions
 " Plugin 'tpope/vim-obsession'
-" Plugin 'dhruvasagar/vim-prosession'
-Plugin 'gikmx/ctrlp-obsession'
+Plugin 'mhinz/vim-startify'
 
 
 Plugin 'dyng/ctrlsf.vim'  "search in files. Use :FS [pattern]
@@ -121,15 +120,15 @@ let g:ycm_python_binary_path = 'python3'
 let g:ycm_server_python_interpreter = 'python3'
 let g:ycm_add_preview_to_completeopt = 1 " add preview string
 let g:ycm_complete_in_comments = 1
-let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_path_to_python_interpreter = 'python3'
-" let g:ycm_autoclose_preview_window_after_completion = 1 " close preview automaticly
+let g:ycm_autoclose_preview_window_after_completion = 1 " close preview automaticly
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_extra_conf_globlist = ['/workspace/oplatek/*', '/home/oplatek/code/*', '/Users/oplatek/*']
 
 let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
 let g:ycm_filetype_whitelist = { '*': 1 }
-let g:ycm_key_invoke_completion = '<C-Space>'
 
 
 let g:jsx_ext_required = 0
