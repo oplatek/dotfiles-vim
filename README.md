@@ -7,10 +7,5 @@ git clone this_repo_url  /path/to/vim/portable/direcotry
 git clone git@github.com:oplatek/dotfiles-vim.git $HOME/.vim
 ```
 
-```sh
-alias vim='vim -u /path/to/vim/portable/direcotry/vimrc'
-```
-*UPDATE*
-On Vim 7.4 you just clone this repository to `$HOME/.vim`.
-
+Tested with YouCompleteMe with Vim 8.2 compiled with Python3.9 support
 *Pull requests welcomed!*
