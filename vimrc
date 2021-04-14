@@ -44,56 +44,57 @@ call vundle#rc(s:bundle_dir)
 "}}}
 
 "*****************************************************************************
-"" Vundle install packages
+"" Vim-Plug install packages
 "*****************************************************************************
 "{{{
-
-call vundle#begin()  " Keep Plugin commands between vundle#begin/end."
-
+" Install via: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/plugged')
+"
 " original repos on github
-Plugin 'VundleVim/Vundle.vim'  " let Vundle manage Vundle, required
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'kana/vim-fakeclip'
-
-Plugin 'tpope/vim-fugitive'  " git
-Plugin 'tpope/vim-eunuch'  " :Delete, :Unlink, :Move, :Rename, :Chmod, :Mkdir, :Find, :Locate, :SudoWrite, :SudoEdit
-Plugin 'tpope/vim-git'
+" Plug 'shime/vim-livedown'
+" Plug 'juneedahamed/svnj.vim'
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'tshirtman/vim-cython'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'kana/vim-fakeclip'
+Plug 'mxw/vim-jsx'
+" Plug 'fidian/hexmode'
+Plug 'tpope/vim-fugitive'
+" wrapper around unix commands
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-git'
 " aligning text (e.g. tables) on multiple lines
-Plugin 'godlygeek/tabular'  " TODO learn usage
-Plugin 'plasticboy/vim-markdown'
-Plugin 'tpope/vim-surround'  " TODO learn usage
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'SirVer/ultisnips'
+" Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+" Plug 'tpope/vim-surround'
+Plug 'vim-scripts/matchit.zip'
+Plug 'SirVer/ultisnips'
 " Snippets are separate from ultisnips engine
-Plugin 'honza/vim-snippets'
-Plugin 'kien/ctrlp.vim'
-Plugin 'DirDiff.vim'
+Plug 'honza/vim-snippets'
+Plug 'scrooloose/syntastic'
+" if has('patch-8.1.2269')
+"     Plug 'Valloric/YouCompleteMe'
+" else
+    Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py --clang-completer'}
+" endif
 
+" Plug 'yegappan/mru'
+Plug 'kien/ctrlp.vim'
+" Plug 'andviro/flake8-vim'
+" Plug 'oplatek/Conque-Shell'
+" Comment out not currently using plugins - vim startup slow
+Plug 'will133/vim-dirdiff'
 
-" Language related plugins
-Plugin 'mxw/vim-jsx'
-Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'sheerun/vim-polyglot'  " Syntaxes for a lot of languages
-" C++ related
-Plugin 'derekwyatt/vim-fswitch'  " Swithing .h <-> .cc
-Plugin 'bfrg/vim-cpp-modern'
-" Plugin 'fidian/hexmode'
-Plugin 'rhysd/vim-clang-format'
-" Python related
-Plugin 'tomtom/tcomment_vim'
-Plugin 's3rvac/AutoFenc'
-Plugin 'vim-scripts/Tabmerge'
-Plugin 'vim-scripts/mayansmoke'
+Plug 'mhinz/vim-startify'
+" tail -f functionality
+Plug 'vim-scripts/Tail-Bundle'
+Plug 'morhetz/gruvbox'  " color theme
 
-" TODO learn use sessions
-" Plugin 'tpope/vim-obsession'
-Plugin 'mhinz/vim-startify'
+Plug 'tomtom/tcomment_vim'
+Plug 's3rvac/AutoFenc'
+Plug 'vim-scripts/Tabmerge'
 
-
-Plugin 'dyng/ctrlsf.vim'  "search in files. Use :FS [pattern]
-
-call vundle#end()            " required
+call plug#end()
 "}}}
 
 
@@ -104,6 +105,8 @@ call vundle#end()            " required
 filetype plugin indent on     " required!
 
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+let g:gruvbox_contrast_light = 'hard'
+silent! colorscheme gruvbox " interactively :colors mayansmoke
 
 let g:fakeclip_terminal_multiplexer_type = 'tmux'
 "" vim-scripts/UltiSnips
@@ -125,7 +128,7 @@ let g:ycm_autoclose_preview_window_after_completion = 1 " close preview automati
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_extra_conf_globlist = ['/workspace/oplatek/*', '/home/oplatek/code/*', '/Users/oplatek/*']
+let g:ycm_extra_conf_globlist = ['/fsx/oplatek/*', '/home/oplatek/code/*', '/Users/oplatek/*']
 
 let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
 let g:ycm_filetype_whitelist = { '*': 1 }
