@@ -14,6 +14,11 @@ let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME,
 " what is the name of the directory containing this file?
 let s:portable = expand('<sfile>:p:h')
 
+" add the directory to 'runtimepath'
+let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
+
+set nocompatible              " be iMproved, required
+filetype off                  " required -> turned on later after plugin are loaded
 "*****************************************************************************
 "" Vim-Plug install packages
 "*****************************************************************************
