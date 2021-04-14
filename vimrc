@@ -14,35 +14,6 @@ let &runtimepath = printf('%s/vimfiles,%s,%s/vimfiles/after', $VIM, $VIMRUNTIME,
 " what is the name of the directory containing this file?
 let s:portable = expand('<sfile>:p:h')
 
-" add the directory to 'runtimepath'
-let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable)
-
-
-"*****************************************************************************
-"" Vundle Load
-"*****************************************************************************
-" See docs: https://github.com/VundleVim/Vundle.vim
-"{{{
-set nocompatible              " be iMproved, required
-filetype off                  " required -> turned on later after plugin are loaded
-
-" Setting up Vundle - the vim plugin bundler
-let s:vundle_readme=expand(printf('%s/bundle/Vundle.vim/README.md', s:portable))
-let s:bundle_dir = s:portable . '/bundle'
-let s:vundle_dir = s:bundle_dir . '/Vundle.vim'
-if !filereadable(s:vundle_readme)
-  echo "Installing Vundle..."
-  echo "Type :BundleInstall for installing the plugins"
-  execute 'silent !mkdir -p ' . s:bundle_dir
-  execute 'silent !git clone https://github.com/VundleVim/Vundle.vim ' . s:vundle_dir
-endif
-
-" add the bundle directory to 'runtimepath'
-let &runtimepath = printf('%s/bundle/Vundle.vim,%s', s:portable, &runtimepath)
-call vundle#rc(s:bundle_dir)
-
-"}}}
-
 "*****************************************************************************
 "" Vim-Plug install packages
 "*****************************************************************************
