@@ -12,4 +12,4 @@ vim -E -c PlugInstall -c qall    # Run it from shell. It installs Vim plugins.
 ```
 
 
-*Pull requests welcomed!*
+*Pull requests are welcome!*
