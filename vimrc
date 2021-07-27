@@ -31,7 +31,8 @@ call plug#begin('~/.vim/plugged')
 " Plug 'juneedahamed/svnj.vim'
 " Plug 'editorconfig/editorconfig-vim'
 " Plug 'tshirtman/vim-cython'
-Plug 'editorconfig/editorconfig-vim'
+" Plug 'editorconfig/editorconfig-vim'
+Plug 'psf/black', { 'branch': 'stable' }
 Plug 'kana/vim-fakeclip'
 Plug 'mxw/vim-jsx'
 " Plug 'fidian/hexmode'
