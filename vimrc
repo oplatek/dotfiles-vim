@@ -50,9 +50,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic'
 " if has('patch-8.1.2269')
-"     Plug 'Valloric/YouCompleteMe'
+    Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer'}
 " else
-    Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py --clang-completer'}
+"     Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py --clang-completer'}
 " endif
 
 " Plug 'yegappan/mru'
@@ -131,6 +131,8 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ }
+
+autocmd BufWritePre *.py execute ':Black'
 
 
 set diffopt+=vertical
