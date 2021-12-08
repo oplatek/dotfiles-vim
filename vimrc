@@ -117,7 +117,7 @@ let g:jsx_ext_required = 0
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--max-line-length 120 --ignore=E126,E127,E128,E121,E225,E226,E401,E402,E731,F401,E302,F821,W503'
+let g:syntastic_python_flake8_args = '--max-line-length 120 --ignore=E126,E127,E128,E121,E203,E225,E226,E402,E731,F401,E302,W503'
 
 let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
@@ -246,7 +246,7 @@ augroup END
 function ProgramSet()
     setlocal number fdm=syntax fo=tcqnl1 formatlistpat=^\\s*\\%\\(\\d\\+\\\|[A-Za-z]\\\|[IVXLCDM]\\+\\)[\\]:.)}\\t]\\s*
     if exists('+colorcolumn')
-        setlocal colorcolumn=99
+        setlocal colorcolumn=89
     endif
 endfunction
 
