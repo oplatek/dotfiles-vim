@@ -52,7 +52,8 @@ Plug 'scrooloose/syntastic'
 " if has('patch-8.1.2269')
     Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer'}
 " else
-"     Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py --clang-completer'}
+    " Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py --clang-completer'}
+    Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py'}
 " endif
 
 " Plug 'yegappan/mru'
@@ -137,6 +138,7 @@ autocmd BufWritePre *.py execute ':Black'
 
 set diffopt+=vertical
 
+autocmd BufWritePre *.py execute ':Black'
 "}}}
 
 "*****************************************************************************
