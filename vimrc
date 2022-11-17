@@ -29,9 +29,7 @@ call plug#begin('~/.vim/plugged')
 " original repos on github
 " Plug 'shime/vim-livedown'
 " Plug 'juneedahamed/svnj.vim'
-" Plug 'editorconfig/editorconfig-vim'
-" Plug 'tshirtman/vim-cython'
-" Plug 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'kana/vim-fakeclip'
 Plug 'mxw/vim-jsx'
@@ -50,15 +48,14 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'scrooloose/syntastic'
 " if has('patch-8.1.2269')
-    Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer'}
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer'}
 " else
     " Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py --clang-completer'}
-    Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py'}
+    " Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py'}
 " endif
 
 " Plug 'yegappan/mru'
 Plug 'kien/ctrlp.vim'
-" Plug 'andviro/flake8-vim'
 " Plug 'oplatek/Conque-Shell'
 " Comment out not currently using plugins - vim startup slow
 Plug 'will133/vim-dirdiff'
@@ -97,11 +94,15 @@ let g:ultisnips_author = 'Ondrej Platek'
 let g:ultisnips_author_email = 'ondrej.platek@seznam.cz'
 
 
-let g:ycm_python_binary_path = 'python3'
-let g:ycm_server_python_interpreter = 'python3'
+if has('unix')
+  # ufal cluster
+  let g:ycm_server_python_interpreter = '/home/oplatek/code/conda/miniconda3_py39_4.12.0/bin/python'
+else
+  let g:ycm_server_python_interpreter = '/Users/oplatek/conda/Miniconda3-py39_4.12.0/bin/python'
+endif
+
 let g:ycm_add_preview_to_completeopt = 1 " add preview string
 let g:ycm_complete_in_comments = 1
-let g:ycm_path_to_python_interpreter = 'python3'
 let g:ycm_autoclose_preview_window_after_completion = 1 " close preview automaticly
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
@@ -116,9 +117,14 @@ let g:jsx_ext_required = 0
 
 " let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_python_python_exec = 'python3'
+if has('unix')
+  let g:syntastic_python_python_exec = '/home/oplatek/code/conda/miniconda3_py39_4.12.0/bin/python'
+else
+  let g:syntastic_python_python_exec = '/Users/oplatek/conda/Miniconda3-py39_4.12.0/bin/python'
+endif
+
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--max-line-length 120 --ignore=E126,E127,E128,E121,E203,E225,E226,E402,E731,F401,E302,W503'
+let g:syntastic_python_flake8_args = '--max-line-length 120 --ignore=E126,E127,E128,E121,E203,E225,E226,E402,E731,F401,E302,W503,W605'
 
 let g:syntastic_javascript_checkers = ['jsxhint']
 let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
@@ -133,12 +139,9 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ }
 
-autocmd BufWritePre *.py execute ':Black'
-
 
 set diffopt+=vertical
 
-autocmd BufWritePre *.py execute ':Black'
 "}}}
 
 "*****************************************************************************
@@ -185,7 +188,8 @@ set noerrorbells
 set novisualbell
 set t_vb=
 
-"autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif  " TODO document what does it do?
+" opens file at the same position https://stackoverflow.com/a/774599/2171485
+autocmd BufReadPost * if line("'\"")>0 && line("'\"")<=line("$")|exe "normal g`\""|endif
 
 
 " Encoding: Using Autofenc
@@ -280,6 +284,12 @@ augroup END
 " Fix bug where crontab cannot use Vim backup files & crontab is complaining:
 " crontab: temp file must be edited in place
 autocmd filetype crontab setlocal nobackup nowritebackup
+
+let g:black_virtualenv="~/.vim/black"
+augroup black_on_save
+  autocmd!
+  autocmd BufWritePre *.py Black
+augroup end
 
 " fswitch
 au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'
