@@ -19,34 +19,16 @@ let &runtimepath = printf('%s,%s,%s/after', s:portable, &runtimepath, s:portable
 
 set nocompatible              " be iMproved, required
 filetype off                  " required -> turned on later after plugin are loaded
-"*****************************************************************************
-"" Vim-Plug install packages
-"*****************************************************************************
 "{{{
 " Install via: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/plugged')
 "
-" original repos on github
-" Plug 'shime/vim-livedown'
-" Plug 'juneedahamed/svnj.vim'
+Plug 'kien/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'psf/black', { 'branch': 'stable' }
-Plug 'kana/vim-fakeclip'
-Plug 'mxw/vim-jsx'
+" Plug 'psf/black', { 'branch': 'stable' }  " let's use precommit hook instead
+" and CLI black. See XY repo
 " Plug 'fidian/hexmode'
 Plug 'tpope/vim-fugitive'
-" wrapper around unix commands
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-git'
-" aligning text (e.g. tables) on multiple lines
-" Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
-" Plug 'tpope/vim-surround'
-Plug 'vim-scripts/matchit.zip'
-Plug 'SirVer/ultisnips'
-" Snippets are separate from ultisnips engine
-Plug 'honza/vim-snippets'
-Plug 'scrooloose/syntastic'
 " if has('patch-8.1.2269')
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer'}
 " else
@@ -54,19 +36,7 @@ Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer'}
     " Plug 'ycm-core/YouCompleteMe', { 'commit':'d98f896', 'do': './install.py'}
 " endif
 
-" Plug 'yegappan/mru'
-Plug 'kien/ctrlp.vim'
-" Plug 'oplatek/Conque-Shell'
-" Comment out not currently using plugins - vim startup slow
-Plug 'will133/vim-dirdiff'
-
-Plug 'mhinz/vim-startify'
-" tail -f functionality
-Plug 'vim-scripts/Tail-Bundle'
-Plug 'morhetz/gruvbox'  " color theme
-
 Plug 'tomtom/tcomment_vim'
-Plug 's3rvac/AutoFenc'
 Plug 'vim-scripts/Tabmerge'
 
 call plug#end()
@@ -84,20 +54,13 @@ let g:gruvbox_contrast_light = 'hard'
 silent! colorscheme gruvbox " interactively :colors mayansmoke
 
 let g:fakeclip_terminal_multiplexer_type = 'tmux'
-"" vim-scripts/UltiSnips
-let g:UltiSnipsExpandTrigger = '<c-l>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-" let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
-let g:UltiSnipsListSnippets = '<c-o>' " terminal does not understand <c-tab>
-let g:ultisnips_python_style = 'sphinx'
-let g:ultisnips_author = 'Ondrej Platek'
-let g:ultisnips_author_email = 'ondrej.platek@seznam.cz'
 
 
 if has('unix')
-  # ufal cluster
-  let g:ycm_server_python_interpreter = '/home/oplatek/code/conda/miniconda3_py39_4.12.0/bin/python'
+  " ufal cluster
+  let g:ycm_server_python_interpreter = '/ha/home/oplatek/code/conda/miniconda3_py11_23.5.2/bin/python'
 else
+  " macbook
   let g:ycm_server_python_interpreter = '/Users/oplatek/conda/Miniconda3-py39_4.12.0/bin/python'
 endif
 
@@ -107,31 +70,13 @@ let g:ycm_autoclose_preview_window_after_completion = 1 " close preview automati
 
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
 let g:ycm_confirm_extra_conf = 0
-let g:ycm_extra_conf_globlist = ['/fsx/oplatek/*', '/home/oplatek/code/*', '/Users/oplatek/*']
+let g:ycm_extra_conf_globlist = ['/home/oplatek/code/*', '/Users/oplatek/*']
 
 let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
 let g:ycm_filetype_whitelist = { '*': 1 }
 
 
-let g:jsx_ext_required = 0
 
-" let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-if has('unix')
-  let g:syntastic_python_python_exec = '/home/oplatek/code/conda/miniconda3_py39_4.12.0/bin/python'
-else
-  let g:syntastic_python_python_exec = '/Users/oplatek/conda/Miniconda3-py39_4.12.0/bin/python'
-endif
-
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_flake8_args = '--max-line-length 120 --ignore=E126,E127,E128,E121,E203,E225,E226,E402,E731,F401,E302,W503,W605'
-
-let g:syntastic_javascript_checkers = ['jsxhint']
-let g:syntastic_javascript_jsxhint_exec = 'jsx-jshint-wrapper'
-
-let g:startify_show_files_number = 20
-let g:startify_session_dir = '~/.vim/session'
-let g:startify_show_sessions = 1
 
 let g:ctrlp_cmd = 'CtrlPMRU'
 let g:ctrlp_custom_ignore = {
@@ -285,11 +230,11 @@ augroup END
 " crontab: temp file must be edited in place
 autocmd filetype crontab setlocal nobackup nowritebackup
 
-let g:black_virtualenv="~/.vim/black"
-augroup black_on_save
-  autocmd!
-  autocmd BufWritePre *.py Black
-augroup end
+" let g:black_virtualenv="~/.vim/black"
+" augroup black_on_save
+"   autocmd!
+"   autocmd BufWritePre *.py Black
+" augroup end
 
 " fswitch
 au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'
