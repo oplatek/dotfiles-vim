@@ -239,6 +239,10 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 " fswitch
 au! BufEnter *.cpp,*.cc,*.c let b:fswitchdst = 'h,hpp'
 au! BufEnter *.h,*hpp let b:fswitchdst = 'cc,cpp'
+
+" Coloring unnecessary whitespaces
+highlight BadWhitespace ctermbg=red guibg=red
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 "}}}
 
 "*****************************************************************************
@@ -249,9 +253,6 @@ nnoremap <Leader>d :YcmCompleter GetDoc<Cr>
 nnoremap <Leader>f :YcmCompleter GoTo<Cr>
 nnoremap <Leader>r :YcmForceCompileAndDiagnostics<CR>
 nnoremap <Leader>c :YcmDiags<CR>
-
-" fswitch
-nnoremap <Leader>s :FSHere<CR>
 
 
 nnoremap <C-n> :put=''<CR>
